@@ -29,6 +29,8 @@ def load_from_json(fname):
     with open(fname, 'r') as f:
         return _json_to_dict(f.read())
 
+# I've included this because I would prefer to work with a straight dictionary
+# instead of having to deal with json while I'm developing it.
 def load_from_python(fname):
     '''
     Given a python file with a single dictionary defined called d, load it.
@@ -40,3 +42,14 @@ def load_from_python(fname):
     module_name = module_name.replace('/', '.')
     module = import_module(module_name)
     return module.d
+
+
+
+def dump_to_csv(timeline_dict):
+    '''TODO'''
+    pass
+
+
+def dump_to_json(timeline_dict):
+    '''TODO'''
+    pass
