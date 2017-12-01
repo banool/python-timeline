@@ -4,8 +4,10 @@ from collections import namedtuple
 
 Duration = namedtuple('Duration', ['start', 'end', 'description', 'present'])
 
+
 def _dict_to_json(d):
     return json.dumps(d)
+
 
 def _json_to_dict(j):
     d = json.loads(j)
@@ -14,7 +16,8 @@ def _json_to_dict(j):
         new[k] = [Duration(*i) for i in v]
     return new
 
-### Only the below functions should be used externally. ###
+# Only the below functions should be used externally.
+
 
 def load_from_csv(fname):
     '''
@@ -22,12 +25,14 @@ def load_from_csv(fname):
     '''
     pass
 
+
 def load_from_json(fname):
     '''
     Given a json file, load the data into a python dictionary.
     '''
     with open(fname, 'r') as f:
         return _json_to_dict(f.read())
+
 
 # I've included this because I would prefer to work with a straight dictionary
 # instead of having to deal with json while I'm developing it.
@@ -42,7 +47,6 @@ def load_from_python(fname):
     module_name = module_name.replace('/', '.')
     module = import_module(module_name)
     return module.d
-
 
 
 def dump_to_csv(timeline_dict):
