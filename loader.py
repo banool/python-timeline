@@ -2,6 +2,9 @@ import json
 
 from collections import namedtuple
 
+# Example Duration('2014-01-01', '2015-01-01', '', True)
+# Example Duration('2017-01-06', '2017-04-06', 'In America', False)
+# Example Duration('2017-01-06', '', '', True)  # Empty end means ongoing.
 Duration = namedtuple('Duration', ['start', 'end', 'description', 'present'])
 
 
