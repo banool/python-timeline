@@ -49,8 +49,9 @@ def export_to_visjs_timeline(d, out=sys.stdout):
         for i in v:
             end_date = i.end if i.end else current_end
             end = ', end: "%s"' % end_date
-            print('    { id: %d, content: "%s", start: "%s"%s },' % (
-                count, k, i.start, end,
+            classname = 'present' if i.present else 'away'
+            print('    { id: %d, content: "%s", className: "%s", start: "%s"%s },' % (
+                count, k, classname, i.start, end,
             ))
             count += 1
     print(']);')

@@ -1,31 +1,55 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Timeline | Basic demo</title>
+    <title>Timeline | Basic demo</title>
 
-  <style type="text/css">
-    body, html {
-      font-family: sans-serif;
-    }
-  </style>
+    <style type="text/css">
+        body {
+            font-family: Helvetica, sans-serif;
+        }
+        .vis-timeline {
+            border: 2px solid black;
+            /* font-family: purisa, 'comic sans', cursive; */
+            font-size: 12pt;
+            background: #ffffff;
+        }
+        .vis-item.away {
+            background-color: greenyellow;
+            border-color: green;
+        }
+    </style>
+  
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="data.js"></script>
 </head>
 <body>
 <div id="visualization"></div>
 
 <script type="text/javascript">
-  // DOM element where the Timeline will be attached
-  var container = document.getElementById('visualization');
+    // DOM element where the Timeline will be attached
+    var container = document.getElementById('visualization');
 
-  // Configuration for the Timeline
-  var options = {};
+    // Sort by start date
+    function customOrder(a, b) {
+        return b.start - a.start;
+    }
 
-  // Create a Timeline
-  // items is loaded from data.js above.
-  var timeline = new vis.Timeline(container, items, options);
+    // Configuration for the Timeline
+    var options = { order: customOrder };
+
+    // Create a Timeline
+    // items is loaded from data.js above.
+    var timeline = new vis.Timeline(container, items, options);
+
+    var ordering = document.getElementById('ordering');
+    ordering.onchange = function () {
+        timeline.setOptions({
+            order: ordering.checked ? customOrder : null
+        });
+    };
+
 </script>
 </body>
 </html>
