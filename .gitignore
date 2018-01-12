@@ -1,6 +1,7 @@
 # My stuff
 myvenv/
 housemates.py
+data.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
