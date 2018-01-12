@@ -1,3 +1,6 @@
+# I personally think it's easiest to just define the data in a Python dict,
+# like in example.py. This file gives you other options just in case.
+
 import json
 
 from collections import namedtuple

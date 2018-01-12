@@ -44,7 +44,7 @@ def get_valid_date(date_to_validate):
 def export_to_visjs_timeline(d, out=sys.stdout):
     current_end = datetime.now().strftime('%Y-%m-%d')
     count = 1
-    print('var items = new vis.DataSet([')
+    print('var items = new vis.DataSet([', file=out)
     for k, v in d.items():
         for i in v:
             end_date = i.end if i.end else current_end
@@ -52,9 +52,9 @@ def export_to_visjs_timeline(d, out=sys.stdout):
             classname = 'present' if i.present else 'away'
             print('    { id: %d, content: "%s", className: "%s", start: "%s"%s },' % (
                 count, k, classname, i.start, end,
-            ))
+            ), file=out)
             count += 1
-    print(']);')
+    print(']);', file=out)
 
 
 def main():
