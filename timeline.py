@@ -2,6 +2,8 @@
 # The main use case I have in mind is to display the timeline of who has lived
 # in my sharehouse, I've always been interested in making something like this.
 
+import sys
+
 from contextlib import suppress
 from datetime import datetime
 from loader import Duration
@@ -21,6 +23,8 @@ def validate(timeline_dict):
             assert isinstance(i, Duration)
             assert get_valid_date(i.start) is not None
             assert get_valid_date(i.end) is not None or i.end == ''
+            if i.end != '':
+                assert i.start < i.end
             assert isinstance(i.present, bool)
             if last is not None:
                 # Assert that this start is one day ahead of `last`.
@@ -37,10 +41,26 @@ def get_valid_date(date_to_validate):
     return res
 
 
+def export_to_visjs_timeline(d, out=sys.stdout):
+    current_end = datetime.now().strftime('%Y-%m-%d')
+    count = 1
+    print('var items = new vis.DataSet([')
+    for k, v in d.items():
+        for i in v:
+            end_date = i.end if i.end else current_end
+            end = ', end: "%s"' % end_date
+            print('    { id: %d, content: "%s", start: "%s"%s },' % (
+                count, k, i.start, end,
+            ))
+            count += 1
+    print(']);')
+
+
 def main():
-    print('Using "d" from example.py')
+    # print('Using "d" from example.py')
     from example import d
     validate(d)
+    export_to_visjs_timeline(d)
 
 
 if __name__ == '__main__':
