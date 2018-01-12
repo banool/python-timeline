@@ -1,3 +1,7 @@
+# My stuff
+myvenv/
+housemates.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

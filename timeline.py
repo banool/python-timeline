@@ -42,6 +42,10 @@ def get_valid_date(date_to_validate):
 
 
 def export_to_visjs_timeline(d, out=sys.stdout):
+    '''This function produces the appropriate json dictionary that
+    timeline.html is expecting. Pipe the output of this program
+    to a file called data.js.
+    '''
     current_end = datetime.now().strftime('%Y-%m-%d')
     count = 1
     print('var items = new vis.DataSet([', file=out)
